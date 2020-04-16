@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/survey")
 public class SurveyController {
@@ -16,8 +18,10 @@ public class SurveyController {
     private SurveyService service;
 
     @PostMapping
-    public Survey createSurvey(@RequestBody Survey surveyDTO) {
-        return service.createSurvey(surveyDTO);
+    public Survey createSurvey(@RequestBody Survey survey, HttpServletRequest request) {
+        String remoteAddr = request.getRemoteAddr();
+        survey.setRemoteAddr(remoteAddr);
+        return service.createSurvey(survey);
     }
 
 }
