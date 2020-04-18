@@ -1,6 +1,7 @@
 package de.nld.deverello.masternode.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,10 +19,16 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Autowired
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
+    @Value("${app.usermanagement.username}")
+    private String username;
+
+    @Value("${app.usermanagement.password}")
+    private String password;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("user1Pass"))
+                .withUser(username).password(passwordEncoder().encode(password))
                 .authorities("ROLE_USER");
     }
 
