@@ -1,5 +1,5 @@
 package de.nld.deverello.masternode.model;
 
 public enum Type {
-    DEFAULT, CODE
+    DEFAULT, CODE, CODE_ANSWER
 }
