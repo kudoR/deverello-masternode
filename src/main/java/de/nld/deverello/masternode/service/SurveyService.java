@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class SurveyService {
@@ -18,6 +19,10 @@ public class SurveyService {
         survey.setPath(path);
         survey.setDateTime(LocalDateTime.now().toString());
         return surveyRepository.save(survey);
+    }
+
+    public List<Survey> getActiveSurveys() {
+        return surveyRepository.findByActiveIsTrue();
     }
 
 }
