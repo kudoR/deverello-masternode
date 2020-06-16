@@ -42,6 +42,8 @@ public class SurveyBase {
 
     private Long durationInSeconds;
 
+    private CodeLanguage codeLanguage;
+
     public SurveyBase() {
         this.type = Type.CODE;
     }
